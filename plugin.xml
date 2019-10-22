@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.wg.tronclass.WeChatPayment" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>WeChatPayment</name>
+
+    <js-module name="WeChatPayment" src="www/WeChatPayment.js">
+        <clobbers target="cordova.plugins.WeChatPayment"/>
+    </js-module>
+
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="WeChatPayment">
+                <param name="ios-package" value="WeChatPayment"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/WeChatPayment.h" />
+        <source-file src="src/ios/WeChatPayment.m" />
+        <header-file src="src/ios/ApiXml.h" />
+        <source-file src="src/ios/ApiXml.mm" />
+
+        <header-file src="src/ios/wechat/WXApi.h" />
+        <header-file src="src/ios/wechat/WXApiObject.h" />
+        <source-file src="src/ios/wechat/libWeChatSDK.a" framework="true" />
+
+        <!-- AFNetworking -->
+        <header-file src="src/ios/AFNetworking/AFHTTPClient.h" />
+        <source-file src="src/ios/AFNetworking/AFHTTPClient.m" />
+        <header-file src="src/ios/AFNetworking/AFHTTPRequestOperation.h" />
+        <source-file src="src/ios/AFNetworking/AFHTTPRequestOperation.m" />
+        <header-file src="src/ios/AFNetworking/AFImageRequestOperation.h" />
+        <source-file src="src/ios/AFNetworking/AFImageRequestOperation.m" />
+        <header-file src="src/ios/AFNetworking/AFJSONRequestOperation.h" />
+        <source-file src="src/ios/AFNetworking/AFJSONRequestOperation.m" />
+        <header-file src="src/ios/AFNetworking/AFNetworkActivityIndicatorManager.h" />
+        <source-file src="src/ios/AFNetworking/AFNetworkActivityIndicatorManager.m" />
+        <header-file src="src/ios/AFNetworking/AFNetworking.h" />
+        <header-file src="src/ios/AFNetworking/AFPropertyListRequestOperation.h" />
+        <source-file src="src/ios/AFNetworking/AFPropertyListRequestOperation.m" />
+        <header-file src="src/ios/AFNetworking/AFURLConnectionOperation.h" />
+        <source-file src="src/ios/AFNetworking/AFURLConnectionOperation.m" />
+        <header-file src="src/ios/AFNetworking/AFXMLRequestOperation.h" />
+        <source-file src="src/ios/AFNetworking/AFXMLRequestOperation.m" />
+        <header-file src="src/ios/AFNetworking/UIImageView+AFNetworking.h" />
+        <source-file src="src/ios/AFNetworking/UIImageView+AFNetworking.m" />
+        <!-- afnetworking 依赖security.framework -->
+        <framework src="Security.framework" />
+        <framework src="libsqlite3.dylib" />
+        <framework src="libz.dylib" />
+        <framework src="libc++.dylib" />
+        <framework src="SystemConfiguration.framework" />
+
+        <header-file src="src/ios/JSONKit/JSONKit.h" />
+        <source-file src="src/ios/JSONKit/JSONKit.m" compiler-flags="-fno-objc-arc" />
+    </platform>
+
+
+    <!-- android -->
+    <platform name="android">
+        <hook type="after_plugin_install" src="scripts/android/changePackage.js" />
+        <hook type="before_plugin_rm" src="scripts/android/changePackage.js" />
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="WeChatPayment">
+                <param name="android-package" value="com.tronclass.cordova.plugin.WeChatPayment" />
+            </feature>
+        </config-file>
+
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </config-file>
+
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:name="com.wisdomgarden.trpc.wxapi.WXPayEntryActivity" android:exported="true" android:launchMode="singleTop">
+            </activity>
+            <receiver android:name="net.sourceforge.simcpux.AppRegister">
+                <intent-filter>
+                    <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
+                </intent-filter>
+            </receiver>
+        </config-file>
+
+        <source-file src="src/android/libammsdk.jar" target-dir="libs" />
+        <source-file src="src/android/com/tronclass/cordova/Config.java" target-dir="src/com/tronclass/cordova" />
+        <source-file src="src/android/com/tronclass/cordova/plugin/WeChatPayment.java" target-dir="src/com/tronclass/cordova/plugin" />
+        <source-file src="src/android/com/tronclass/x5/v3/wxapi/WXPayEntryActivity.java" target-dir="src/com/tronclass/x5/v3/wxapi" />
+        <source-file src="src/android/com/tronclass/x5/base/Constants.java" target-dir="src/com/tronclass/x5/base" />
+        <source-file src="src/android/net/sourceforge/simcpux/AppRegister.java" target-dir="src/net/sourceforge/simcpux" />
+       
+    </platform>
+
+
+</plugin>

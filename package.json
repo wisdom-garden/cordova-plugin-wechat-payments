@@ -1,0 +1,30 @@
+{
+  "name": "cordova-plugin-wechat-payments",
+  "version": "1.0.0",
+  "description": "Cordova Wechat Payments Plugin",
+  "types": "",
+  "cordova": {
+    "id": "cordova-plugin-weixinpayments",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "keywords": [
+    "cordova",
+    "wechat",
+    "payments"
+  ],
+  "scripts": {
+  },
+  "author": "Annoymous",
+  "license": "Apache-2.0",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "devDependencies": {
+  }
+}
